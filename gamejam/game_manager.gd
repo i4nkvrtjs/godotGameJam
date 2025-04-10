@@ -8,3 +8,5 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("toggleLog"):
 		animalLog.toggle_log()
+	elif event.is_action_pressed("logNext"):
+		animalLog.next_animal()

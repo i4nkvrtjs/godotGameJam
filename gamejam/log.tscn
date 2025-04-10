@@ -46,11 +46,10 @@ offset_top = 27.0
 offset_right = 470.0
 offset_bottom = 520.0
 
-[node name="Titulo" type="Label" parent="Panel/VBoxContainer"]
+[node name="AnimalName" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
-text = "Bitácora de Animales"
 
 [node name="Habitat" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
@@ -66,6 +65,9 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
+[node name="HabitatLabel" type="Label" parent="Panel/VBoxContainer/Habitat"]
+layout_mode = 2
+
 [node name="Actividad" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
 
@@ -76,6 +78,9 @@ text = "Actividad"
 [node name="Actividad_OptionButton" type="OptionButton" parent="Panel/VBoxContainer/Actividad"]
 layout_mode = 2
 
+[node name="ActividadLabel" type="Label" parent="Panel/VBoxContainer/Actividad"]
+layout_mode = 2
+
 [node name="Socialidad" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
 
@@ -84,6 +89,9 @@ layout_mode = 2
 text = "Socialidad"
 
 [node name="Socialidad_OptionButton" type="OptionButton" parent="Panel/VBoxContainer/Socialidad"]
+layout_mode = 2
+
+[node name="SocialidadLabel" type="Label" parent="Panel/VBoxContainer/Socialidad"]
 layout_mode = 2
 
 [node name="Cerrar" type="Button" parent="Panel/VBoxContainer"]

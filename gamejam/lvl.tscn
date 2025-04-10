@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://db5q6bue17m0x"]
 
-[ext_resource type="Shader" path="res://sky.gdshader" id="1_4iw1c"]
+[ext_resource type="Shader" uid="uid://hpw1dh2cp68s" path="res://sky.gdshader" id="1_4iw1c"]
 [ext_resource type="Script" uid="uid://dwlxgeejc7hik" path="res://sky.gd" id="2_hx1ia"]
 [ext_resource type="Script" uid="uid://bktu3b21s1lja" path="res://character_body_3d.gd" id="3_k0o5b"]
 [ext_resource type="Script" uid="uid://c2xp8olpv5uu7" path="res://game_manager.gd" id="4_k0o5b"]
@@ -75,21 +75,21 @@ mesh = SubResource("PlaneMesh_i3pqv")
 shape = SubResource("ConcavePolygonShape3D_hqtel")
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.455746, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.544254, 0)
 script = ExtResource("3_k0o5b")
 MOUSE_SENS_X = 0.005
 MOUSE_SENS_Y = 0.005
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(0.644406, 0, 0, 0, 0.644406, 0, 0, 0, 0.644406, 0, 1.16895, 0)
+transform = Transform3D(0.644406, 0, 0, 0, 0.644406, 0, 0, 0, 0.644406, 0, 0.16895, 0)
 mesh = SubResource("CapsuleMesh_sweqy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(0.644406, 0, 0, 0, 0.644406, 0, 0, 0, 0.644406, 0, 1.16895, 0)
+transform = Transform3D(0.644406, 0, 0, 0, 0.644406, 0, 0, 0, 0.644406, 0, 0.16895, 0)
 shape = SubResource("ConvexPolygonShape3D_2hs0m")
 
 [node name="Neck" type="Node3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42856, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42856, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Player/Neck"]
 
