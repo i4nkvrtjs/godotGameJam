@@ -1,11 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://dtv6aebrnfgd4"]
+[gd_scene load_steps=17 format=3 uid="uid://db5q6bue17m0x"]
 
-[ext_resource type="Script" uid="uid://bktu3b21s1lja" path="res://character_body_3d.gd" id="1_4flbx"]
-[ext_resource type="Shader" uid="uid://hpw1dh2cp68s" path="res://sky.gdshader" id="1_onrkg"]
-[ext_resource type="Script" uid="uid://dwlxgeejc7hik" path="res://sky.gd" id="2_i3pqv"]
+[ext_resource type="Shader" path="res://sky.gdshader" id="1_4iw1c"]
+[ext_resource type="Script" uid="uid://dwlxgeejc7hik" path="res://sky.gd" id="2_hx1ia"]
+[ext_resource type="Script" uid="uid://bktu3b21s1lja" path="res://character_body_3d.gd" id="3_k0o5b"]
+[ext_resource type="Script" uid="uid://c2xp8olpv5uu7" path="res://game_manager.gd" id="4_k0o5b"]
+[ext_resource type="PackedScene" uid="uid://6h1djuw3k621" path="res://log.tscn" id="5_2a1lc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i3pqv"]
-shader = ExtResource("1_onrkg")
+shader = ExtResource("1_4iw1c")
 shader_parameter/skyColor = Color(0.245362, 0.612918, 0.999979, 1)
 
 [sub_resource type="Sky" id="Sky_hqtel"]
@@ -44,7 +46,7 @@ points = PackedVector3Array(-0.125207, -0.532801, -0.480507, 0.0227831, 0.47607,
 
 [node name="Sky" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_onrkg")
-script = ExtResource("2_i3pqv")
+script = ExtResource("2_hx1ia")
 
 [node name="SunMoon" type="Node3D" parent="Sky"]
 transform = Transform3D(0.177085, -0.984196, 0, -0.982935, -0.176858, -0.0505929, 0.0497933, 0.00895923, -0.998719, 0, 6.1254, 0)
@@ -74,7 +76,7 @@ shape = SubResource("ConcavePolygonShape3D_hqtel")
 
 [node name="Player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.455746, 0)
-script = ExtResource("1_4flbx")
+script = ExtResource("3_k0o5b")
 MOUSE_SENS_X = 0.005
 MOUSE_SENS_Y = 0.005
 
@@ -90,3 +92,9 @@ shape = SubResource("ConvexPolygonShape3D_2hs0m")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42856, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Player/Neck"]
+
+[node name="GameManager" type="Node3D" parent="."]
+script = ExtResource("4_k0o5b")
+
+[node name="Log" parent="." node_paths=PackedStringArray("game_manager") instance=ExtResource("5_2a1lc")]
+game_manager = NodePath("../GameManager")

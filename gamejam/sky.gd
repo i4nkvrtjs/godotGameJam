@@ -1,6 +1,6 @@
 extends WorldEnvironment
 
-##Duración del ciclo en segundos
+## Duración del ciclo en segundos
 @export var cycle_duration: float = 60.0 
 
 @onready var sun: MeshInstance3D = $SunMoon/Sun

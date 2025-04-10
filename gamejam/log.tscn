@@ -1,0 +1,96 @@
+[gd_scene load_steps=3 format=3 uid="uid://6h1djuw3k621"]
+
+[ext_resource type="Script" uid="uid://dj2dr1l3pgs66" path="res://log.gd" id="1_5gxlv"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_a0a2b"]
+
+[node name="Log" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5gxlv")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.0980392, 0.0980392, 0.0980392, 0.164706)
+
+[node name="Panel" type="Panel" parent="."]
+material = SubResource("CanvasItemMaterial_a0a2b")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -177.0
+offset_top = -334.0
+offset_right = 323.0
+offset_bottom = 266.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 27.0
+offset_right = 470.0
+offset_bottom = 520.0
+
+[node name="Titulo" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Bitácora de Animales"
+
+[node name="Habitat" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="Habitat" type="Label" parent="Panel/VBoxContainer/Habitat"]
+layout_mode = 2
+text = "Habitat"
+
+[node name="Habitat_OptionButton" type="OptionButton" parent="Panel/VBoxContainer/Habitat"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="Actividad" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Actividad" type="Label" parent="Panel/VBoxContainer/Actividad"]
+layout_mode = 2
+text = "Actividad"
+
+[node name="Actividad_OptionButton" type="OptionButton" parent="Panel/VBoxContainer/Actividad"]
+layout_mode = 2
+
+[node name="Socialidad" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Socialidad" type="Label" parent="Panel/VBoxContainer/Socialidad"]
+layout_mode = 2
+text = "Socialidad"
+
+[node name="Socialidad_OptionButton" type="OptionButton" parent="Panel/VBoxContainer/Socialidad"]
+layout_mode = 2
+
+[node name="Cerrar" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Cerrar"
+
+[connection signal="item_selected" from="Panel/VBoxContainer/Habitat/Habitat_OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="Panel/VBoxContainer/Actividad/Actividad_OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="Panel/VBoxContainer/Socialidad/Socialidad_OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="Panel/VBoxContainer/Cerrar" to="." method="_on_cerrar_pressed"]
