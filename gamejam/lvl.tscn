@@ -80,6 +80,7 @@ _shader_parameters = {
 &"projection_threshold": 0.8,
 &"world_space_normal_blend": true
 }
+show_region_grid = true
 
 [node name="Lvl" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.4732, 0, 34.5257)
@@ -87,7 +88,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.4732, 0, 34.5257)
 [node name="Sky" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_onrkg")
 script = ExtResource("2_hx1ia")
-cycle_duration = 120.0
 
 [node name="SunMoon" type="Node3D" parent="Sky"]
 transform = Transform3D(0.177085, -0.984196, 7.48343e-09, 0.0730057, 0.0131358, -0.997245, 0.981484, 0.176597, 0.0741781, 34.3079, -0.608632, 45.107)
@@ -136,5 +136,7 @@ game_manager = NodePath("../GameManager")
 data_directory = "res://"
 material = SubResource("Terrain3DMaterial_2e6f6")
 assets = ExtResource("6_2a1lc")
+show_grid = true
+show_region_grid = true
 top_level = true
 metadata/_edit_lock_ = true

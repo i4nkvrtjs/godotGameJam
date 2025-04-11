@@ -7,83 +7,94 @@ extends Control
 		"Habitat": "Bosque",
 		"Actividad": "Diurno",
 		"Socialidad": "Solitario",
-		"Interactuable": ["Habitat", "Socialidad"]
+		"Interactuable": ["Habitat", "Socialidad"],
+		"Locked": false
 	},
 	{
 		"Nombre": "Hippocamelus Bisulcus",
 		"Habitat": "Bosque",
 		"Actividad": "Diurno",
 		"Socialidad": "Solitario",
-		"Interactuable": ["Socialidad"]
+		"Interactuable": ["Socialidad"],
+		"Locked": false
 	},
 	{
 		"Nombre": "Tyto Alba",
 		"Habitat": "Bosque",
 		"Actividad": "Nocturno",
 		"Socialidad": "Solitario",
-		"Interactuable": ["Actividad", "Socialidad"]
+		"Interactuable": ["Actividad", "Socialidad"],
+		"Locked": false
 	},
 	{
 		"Nombre": "Chonchón",
 		"Habitat": "Cueva",
 		"Actividad": "Nocturno",
 		"Socialidad": "Grupal",
-		"Interactuable": ["Habitat", "Actividad", "Socialidad"]
+		"Interactuable": ["Habitat", "Actividad", "Socialidad"],
+		"Locked": false
 	},
 	{
 		"Nombre": "Caimán Yacaré",
 		"Habitat": "Lago",
 		"Actividad": "Diurno",
 		"Socialidad": "Grupal",
-		"Interactuable": ["Habitat", "Actividad"]
+		"Interactuable": ["Habitat", "Actividad"],
+		"Locked": false
 	},
 	{
 		"Nombre": "Nahuelito",
 		"Habitat": "Lago",
 		"Actividad": "Nocturno",
 		"Socialidad": "Solitario",
-		"Interactuable": ["Habitat", "Actividad","Socialidad"]
+		"Interactuable": ["Habitat", "Actividad","Socialidad"],
+		"Locked": false
 	},
 	{
 		"Nombre": "Nyctibius Griseus",
 		"Habitat": "Monte",
 		"Actividad": "Diurno",
 		"Socialidad": "Solitario",
-		"Interactuable": ["Socialidad"]
+		"Interactuable": ["Socialidad"],
+		"Locked": false
 	},
 	{
 		"Nombre": "Priodontes Maximus",
 		"Habitat": "Monte",
 		"Actividad": "Diurno",
 		"Socialidad": "Solitario",
-		"Interactuable": ["Habitat"]
+		"Interactuable": ["Habitat"],
+		"Locked": false
 	},
 	{
 		"Nombre": "Chancha con Cadenas",
 		"Habitat": "Monte",
 		"Actividad": "Nocturno",
 		"Socialidad": "Solitario",
-		"Interactuable": ["Actividad", "Socialidad"]
+		"Interactuable": ["Actividad", "Socialidad"],
+		"Locked": false
 	},
 	{
 		"Nombre": "Hydrochoerus Hydrochaeris",
 		"Habitat": "Pradera",
 		"Actividad": "Diurno",
 		"Socialidad": "Grupal",
-		"Interactuable": ["Actividad"]
+		"Interactuable": ["Actividad"],
+		"Locked": false
 	},
 	{
 		"Nombre": "Aguará Guazú",
 		"Habitat": "Pradera",
 		"Actividad": "Nocturno",
 		"Socialidad": "Solitario",
-		"Interactuable": ["Actividad", "Socialidad"]
+		"Interactuable": ["Actividad", "Socialidad"],
+		"Locked": false
 	}
 ]
 
 @export var category_options: Dictionary = {
 	"Habitat": ["Bosque", "Pradera", "Monte", "Lago", "Cueva"],
-	"Actividad": ["Día", "Noche"],
+	"Actividad": ["Diurno", "Nocturno"],
 	"Socialidad": ["Solitario", "Grupal"]
 }
 var categoryElements = {
@@ -111,7 +122,12 @@ func _ready():
 
 func update_ui():
 	var animal = animals[currentAnimalIndex]
+	
 	$Panel/VBoxContainer/AnimalName.text = animal["Nombre"]
+	$Panel/VBoxContainer/CheckButton.text = "Check Information"
+	
+	var isLocked = animal["Locked"]
+	
 	for category in category_options.keys():
 		var button: OptionButton = get_node_or_null(categoryElements[category]["button"])
 		var label: Label = get_node_or_null(categoryElements[category]["label"])
@@ -122,14 +138,17 @@ func update_ui():
 				button.add_item(option)
 			
 			var esInteractuable = category in animal["Interactuable"]
-			button.visible = esInteractuable
-			label.visible = not esInteractuable
 			
-			if not esInteractuable:
+			if not esInteractuable or isLocked:
 				label.text = animal[category]
-			
-func _on_option_selected(index: int, button: OptionButton, category: String):
-	print(category, "selected:", button.get_item_text(index))
+				button.visible = false
+				label.visible = true
+			else:
+				button.visible = true
+				label.visible = false
+				
+				
+				
 
 func toggle_log():
 	if visible:
@@ -169,4 +188,21 @@ func _input(event):
 		next_animal()
 	elif event.is_action_pressed("logPrev"):
 		prev_animal()
-	
+
+func _on_check_button_pressed() -> void:
+	var animal = animals[currentAnimalIndex]
+	var correct = true
+	for category in animal["Interactuable"]:
+		var button: OptionButton = get_node_or_null(categoryElements[category]["button"])
+		var label: Label = get_node_or_null(categoryElements[category]["label"])
+		if button:
+			var selected_text = button.get_item_text(button.selected)
+			if selected_text != animal[category]:
+				correct = false
+				break
+	if correct:
+		animals[currentAnimalIndex]["Locked"] = true
+		update_ui()
+		$Panel/VBoxContainer/CheckButton.text = "Correcto!"
+	else:
+		$Panel/VBoxContainer/CheckButton.text = "Incorrecto!"

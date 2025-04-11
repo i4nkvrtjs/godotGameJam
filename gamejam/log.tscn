@@ -5,7 +5,6 @@
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_a0a2b"]
 
 [node name="Log" type="Control"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -94,6 +93,10 @@ layout_mode = 2
 [node name="SocialidadLabel" type="Label" parent="Panel/VBoxContainer/Socialidad"]
 layout_mode = 2
 
+[node name="CheckButton" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Check"
+
 [node name="Cerrar" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "Cerrar"
@@ -101,4 +104,5 @@ text = "Cerrar"
 [connection signal="item_selected" from="Panel/VBoxContainer/Habitat/Habitat_OptionButton" to="." method="_on_option_button_item_selected"]
 [connection signal="item_selected" from="Panel/VBoxContainer/Actividad/Actividad_OptionButton" to="." method="_on_option_button_item_selected"]
 [connection signal="item_selected" from="Panel/VBoxContainer/Socialidad/Socialidad_OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="Panel/VBoxContainer/CheckButton" to="." method="_on_check_button_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Cerrar" to="." method="_on_cerrar_pressed"]
