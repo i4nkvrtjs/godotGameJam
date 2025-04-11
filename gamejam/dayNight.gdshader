@@ -13,6 +13,14 @@ uniform vec3 moonColor : source_color;
 uniform float moonSize = 0.1;
 uniform float moonOffset = 0.05;
 
+uniform float starDensity = 0.002;  // Controls number of stars
+uniform float starSize = 0.002;     // Controls how big each star appears
+
+// Hash function for random star placement
+float hash(vec3 p) {
+    return fract(sin(dot(p, vec3(127.1, 311.7, 74.7))) * 43758.5453);
+}
+
 void sky() {
     // Sun blending
     float sunDirection = distance(EYEDIR.xyz, LIGHT0_DIRECTION);
@@ -44,6 +52,24 @@ void sky() {
 
     // Blend the moon into the night sky
     skyColor = mix(skyColor, moon.rgb, moon.a);
+
+    // --------- FIXED STAR GENERATION ---------
+    if (lightY < 0.0) {  // Only show stars at night
+        vec3 worldPos = normalize(EYEDIR); // Ensures stars are placed in world space
+
+        float starNoise = hash(floor(worldPos * (1.0 / starDensity))); 
+        
+        float threshold = 1.0 - starDensity * 5.0;
+
+        if (starNoise > threshold) {
+            float starBrightness = smoothstep(threshold, 1.0, starNoise);
+            
+            // Ensure stars have a proper circular shape
+            float starShape = smoothstep(starSize, 0.0, length(fract(worldPos.xy * 100.0) - 0.5));
+            
+            skyColor += vec3(1.0) * starBrightness * starShape;
+        }
+    }
 
     COLOR = skyColor;
 }

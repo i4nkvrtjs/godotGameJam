@@ -6,15 +6,17 @@
 shader = ExtResource("1_6pb6i")
 shader_parameter/topSkyDay = Color(0.40191, 0.589864, 1, 1)
 shader_parameter/horizonSkyDay = Color(0.118707, 0.355216, 1, 1)
-shader_parameter/topSkyNight = Color(1.20327e-06, 0, 0.477226, 1)
-shader_parameter/horizonSkyNight = Color(8.42288e-08, 0, 0.289934, 1)
-shader_parameter/horizonSunRiseSet = Color(0.992325, 0.637861, 0.793527, 1)
-shader_parameter/topSunRiseSet = Color(1, 0.306232, 0.242456, 1)
+shader_parameter/topSkyNight = Color(0, 0, 0.129412, 1)
+shader_parameter/horizonSkyNight = Color(0, 0.00275985, 0.0747912, 1)
+shader_parameter/horizonSunRiseSet = Color(0.960784, 0, 0.0980392, 1)
+shader_parameter/topSunRiseSet = Color(0.992157, 0.639216, 0.792157, 1)
 shader_parameter/sunColor = Color(0.938046, 0.836532, 0.112936, 1)
 shader_parameter/sunSize = 0.2
 shader_parameter/moonColor = Color(0.878279, 0.932031, 0.998797, 1)
 shader_parameter/moonSize = 0.1
 shader_parameter/moonOffset = 0.05
+shader_parameter/starDensity = 0.01
+shader_parameter/starSize = 0.1
 
 [sub_resource type="Sky" id="Sky_67tih"]
 sky_material = SubResource("ShaderMaterial_gethi")
