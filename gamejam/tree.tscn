@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bortqeccemrxj"]
+
+[ext_resource type="ArrayMesh" uid="uid://dhgocmayvieyd" path="res://demo/assets/models/CommonTree_2.obj" id="1_brfkd"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_f2dqo"]
+radius = 0.25
+
+[node name="Tree" type="StaticBody3D"]
+
+[node name="Tree" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.525784, 0, -0.850618, 0, 1, 0, 0.850618, 0, -0.525784, -1.09486, -0.396953, -2.19054)
+mesh = ExtResource("1_brfkd")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.525784, 0, -0.850618, 0, 1, 0, 0.850618, 0, -0.525784, -1.08014, 0.678743, -2.2187)
+shape = SubResource("CylinderShape3D_f2dqo")

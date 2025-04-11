@@ -1,19 +1,24 @@
-[gd_scene load_steps=23 format=3 uid="uid://0s3fotonyv02"]
+[gd_scene load_steps=22 format=3 uid="uid://0s3fotonyv02"]
 
-[ext_resource type="Shader" uid="uid://hpw1dh2cp68s" path="res://sky.gdshader" id="1_4iw1c"]
 [ext_resource type="Script" uid="uid://dwlxgeejc7hik" path="res://sky.gd" id="2_hx1ia"]
 [ext_resource type="Script" uid="uid://bktu3b21s1lja" path="res://character_body_3d.gd" id="3_k0o5b"]
 [ext_resource type="Script" uid="uid://c2xp8olpv5uu7" path="res://game_manager.gd" id="4_k0o5b"]
 [ext_resource type="PackedScene" uid="uid://6h1djuw3k621" path="res://log.tscn" id="5_2a1lc"]
 [ext_resource type="Terrain3DAssets" uid="uid://dal3jhw6241qg" path="res://demo/data/assets.tres" id="6_2a1lc"]
-[ext_resource type="ArrayMesh" uid="uid://dhgocmayvieyd" path="res://demo/assets/models/CommonTree_2.obj" id="7_f2dqo"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_i3pqv"]
-shader = ExtResource("1_4iw1c")
-shader_parameter/skyColor = Color(0.245362, 0.612918, 0.999979, 1)
+[sub_resource type="Gradient" id="Gradient_k0o5b"]
+colors = PackedColorArray(0.150755, 0.38506, 0.999999, 1, 0.045693, 0.0686127, 0.200742, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2a1lc"]
+gradient = SubResource("Gradient_k0o5b")
+fill_from = Vector2(1, 0.512821)
+fill_to = Vector2(1, 0.517094)
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_f2dqo"]
+night_sky = SubResource("GradientTexture2D_2a1lc")
 
 [sub_resource type="Sky" id="Sky_hqtel"]
-sky_material = SubResource("ShaderMaterial_i3pqv")
+sky_material = SubResource("PhysicalSkyMaterial_f2dqo")
 
 [sub_resource type="Environment" id="Environment_onrkg"]
 background_mode = 2
@@ -85,14 +90,13 @@ _shader_parameters = {
 [sub_resource type="CylinderMesh" id="CylinderMesh_2a1lc"]
 top_radius = 9.786
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_f2dqo"]
-
 [node name="Lvl" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.4732, 0, 34.5257)
 
 [node name="Sky" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_onrkg")
 script = ExtResource("2_hx1ia")
+cycle_duration = 10.0
 
 [node name="SunMoon" type="Node3D" parent="Sky"]
 transform = Transform3D(0.177085, -0.984196, 7.48343e-09, 0.0730057, 0.0131358, -0.997245, 0.981484, 0.176597, 0.0741781, 34.3079, -0.608632, 45.107)
@@ -103,6 +107,8 @@ mesh = SubResource("SphereMesh_onrkg")
 
 [node name="SunLight" type="DirectionalLight3D" parent="Sky/SunMoon/Sun"]
 transform = Transform3D(-0.254729, -0.342633, -0.904276, -0.0458329, 0.938351, -0.342633, 0.965926, -0.0458329, -0.254729, 0, 0, 0)
+light_indirect_energy = 0.0
+sky_mode = 1
 
 [node name="Moon" type="MeshInstance3D" parent="Sky/SunMoon"]
 transform = Transform3D(2.84282, 1.19209e-07, 1.04308e-07, -1.49012e-07, 2.84282, -1.86265e-08, -1.19209e-07, -4.47035e-08, 2.84282, 61.4033, 7.70466, 2.61461)
@@ -110,7 +116,8 @@ mesh = SubResource("SphereMesh_i3pqv")
 
 [node name="MoonLight" type="DirectionalLight3D" parent="Sky/SunMoon/Moon"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-light_energy = 0.1
+light_color = Color(0.143678, 0.449685, 0.999999, 1)
+light_energy = 0.01
 
 [node name="Player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75189, 50.8493)
@@ -147,14 +154,3 @@ metadata/_edit_lock_ = true
 [node name="Lake" type="CSGMesh3D" parent="."]
 transform = Transform3D(2.35583, 0, 0, 0, 1, 0, 0, 0, 1.88131, 0.0223503, -5.94777, 12.6572)
 mesh = SubResource("CylinderMesh_2a1lc")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="Tree" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(-0.525784, 0, -0.850618, 0, 1, 0, 0.850618, 0, -0.525784, 20.6158, -0.67931, 25.3303)
-mesh = ExtResource("7_f2dqo")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(-0.257634, 0, -0.416803, 0, 1.14876, 0, 0.416803, 0, -0.257634, 20.6305, 0.396386, 25.3021)
-shape = SubResource("CylinderShape3D_f2dqo")

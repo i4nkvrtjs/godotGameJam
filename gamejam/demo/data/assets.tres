@@ -1,6 +1,7 @@
-[gd_resource type="Terrain3DAssets" load_steps=23 format=3 uid="uid://dal3jhw6241qg"]
+[gd_resource type="Terrain3DAssets" load_steps=25 format=3 uid="uid://dal3jhw6241qg"]
 
 [ext_resource type="PackedScene" uid="uid://bn5nf4esciwex" path="res://demo/assets/models/LODExample.tscn" id="1_4jrdu"]
+[ext_resource type="PackedScene" uid="uid://bortqeccemrxj" path="res://tree.tscn" id="2_3veh0"]
 [ext_resource type="Texture2D" uid="uid://c88j3oj0lf6om" path="res://demo/assets/textures/rock023_alb_ht.png" id="2_pog6b"]
 [ext_resource type="Texture2D" uid="uid://c2eearsyql30b" path="res://demo/assets/textures/rock_lowpolyALB.png" id="2_uyhyi"]
 [ext_resource type="Texture2D" uid="uid://ddprscrpsofah" path="res://demo/assets/textures/ground037_alb_ht.png" id="3_g8f2m"]
@@ -41,6 +42,15 @@ height_offset = 0.5
 last_lod = 3
 last_shadow_lod = 3
 
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_6ck1f"]
+name = "tree"
+id = 2
+scene_file = ExtResource("2_3veh0")
+density = 0.75775
+last_lod = 0
+last_shadow_lod = 0
+lod0_range = 128.0
+
 [sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_3wxcx"]
 name = "rock_lowpolyALB"
 albedo_texture = ExtResource("2_uyhyi")
@@ -58,6 +68,7 @@ name = "grass_rgbalowpolyALB"
 id = 2
 albedo_texture = ExtResource("6_e6edf")
 normal_texture = ExtResource("7_cmr6o")
+roughness = 0.3
 uv_scale = 0.8
 
 [sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_lha57"]
@@ -85,8 +96,9 @@ name = "sand_lowpolyALB"
 id = 5
 albedo_texture = ExtResource("12_3mny6")
 normal_texture = ExtResource("13_3veh0")
+roughness = 0.3
 uv_scale = 1.0
 
 [resource]
-mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_2qf8x"), SubResource("Terrain3DMeshAsset_or12t")])
+mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_2qf8x"), SubResource("Terrain3DMeshAsset_or12t"), SubResource("Terrain3DMeshAsset_6ck1f")])
 texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_3wxcx"), SubResource("Terrain3DTextureAsset_3mny6"), SubResource("Terrain3DTextureAsset_uyhyi"), SubResource("Terrain3DTextureAsset_lha57"), SubResource("Terrain3DTextureAsset_od0q7"), SubResource("Terrain3DTextureAsset_6ck1f")])
