@@ -79,6 +79,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.4732, 0, 34.5257)
 
 [node name="daynight" parent="." instance=ExtResource("1_2a1lc")]
 
+[node name="DirectionalLight3D" parent="daynight" index="1"]
+transform = Transform3D(-0.855578, -0.516117, 0.0401319, -0.516533, 0.856267, 0, -0.0343637, -0.0207295, -0.999194, 0, 0, 0)
+
+[node name="OmniLight3D" parent="daynight" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.9048, 5)
+light_energy = 1.5
+omni_range = 99.624
+omni_attenuation = 0.5
+
 [node name="Player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75189, 50.8493)
 script = ExtResource("3_k0o5b")
@@ -139,3 +148,5 @@ shape = SubResource("BoxShape3D_k0o5b")
 
 [node name="StaticBody3D2" parent="." instance=ExtResource("7_f2dqo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9099, -3.03222, -33.6382)
+
+[editable path="daynight"]
