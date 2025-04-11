@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://bv5wibmpljywm" path="res://daynight.tscn" id="1_2a1lc"]
 [ext_resource type="Script" uid="uid://bktu3b21s1lja" path="res://character_body_3d.gd" id="3_k0o5b"]
 [ext_resource type="Script" uid="uid://c2xp8olpv5uu7" path="res://game_manager.gd" id="4_k0o5b"]
-[ext_resource type="PackedScene" uid="uid://6h1djuw3k621" path="res://log.tscn" id="5_2a1lc"]
 [ext_resource type="Terrain3DAssets" uid="uid://dal3jhw6241qg" path="res://demo/data/assets.tres" id="6_2a1lc"]
 [ext_resource type="Shader" uid="uid://0fcny8pvh4av" path="res://lake.gdshader" id="6_f2dqo"]
+[ext_resource type="PackedScene" uid="uid://b7itrc11rxktx" path="res://logv2.tscn" id="7_5ud41"]
 [ext_resource type="PackedScene" uid="uid://nru5by5ohud4" path="res://Cave.tscn" id="7_f2dqo"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_sweqy"]
@@ -110,9 +110,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42856, 0)
 [node name="GameManager" type="Node3D" parent="."]
 script = ExtResource("4_k0o5b")
 
-[node name="Log" parent="." node_paths=PackedStringArray("game_manager") instance=ExtResource("5_2a1lc")]
-game_manager = NodePath("../GameManager")
-
 [node name="Terrain3D" type="Terrain3D" parent="."]
 data_directory = "res://"
 material = SubResource("Terrain3DMaterial_2e6f6")
@@ -148,5 +145,7 @@ shape = SubResource("BoxShape3D_k0o5b")
 
 [node name="StaticBody3D2" parent="." instance=ExtResource("7_f2dqo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9099, -3.03222, -33.6382)
+
+[node name="Log" parent="." instance=ExtResource("7_5ud41")]
 
 [editable path="daynight"]
