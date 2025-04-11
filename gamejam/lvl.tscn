@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://0s3fotonyv02"]
+[gd_scene load_steps=23 format=3 uid="uid://0s3fotonyv02"]
 
 [ext_resource type="Script" uid="uid://dwlxgeejc7hik" path="res://sky.gd" id="2_hx1ia"]
 [ext_resource type="Script" uid="uid://bktu3b21s1lja" path="res://character_body_3d.gd" id="3_k0o5b"]
@@ -90,6 +90,9 @@ _shader_parameters = {
 [sub_resource type="CylinderMesh" id="CylinderMesh_2a1lc"]
 top_radius = 9.786
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_k0o5b"]
+size = Vector3(1, 1.41754, 1)
+
 [node name="Lvl" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.4732, 0, 34.5257)
 
@@ -151,6 +154,28 @@ assets = ExtResource("6_2a1lc")
 top_level = true
 metadata/_edit_lock_ = true
 
-[node name="Lake" type="CSGMesh3D" parent="."]
+[node name="Lake" type="StaticBody3D" parent="."]
+
+[node name="Lake" type="CSGMesh3D" parent="Lake"]
 transform = Transform3D(2.35583, 0, 0, 0, 1, 0, 0, 0, 1.88131, 0.0223503, -5.94777, 12.6572)
 mesh = SubResource("CylinderMesh_2a1lc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lake"]
+transform = Transform3D(24.727, 0, 0.562835, 0, 5.02632, 0, -4.28488, 0, 3.24799, 1.32528, -1.42797, 24.0112)
+shape = SubResource("BoxShape3D_k0o5b")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Lake"]
+transform = Transform3D(-2.49549, 0, 5.65819, 0, 7.68753, 0, -23.2893, 0, -0.606284, -15.5178, -3.03053, 15.8605)
+shape = SubResource("BoxShape3D_k0o5b")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Lake"]
+transform = Transform3D(3.01562, 0, 4.50352, 0, 7.68753, 0, -22.1845, 0, 0.612182, 16.2725, -3.03053, 12.0576)
+shape = SubResource("BoxShape3D_k0o5b")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Lake"]
+transform = Transform3D(10.2079, 0, -2.68291, 0, 7.68753, 0, 5.4288, 0, 5.04477, 9.92761, -3.03053, 0.231876)
+shape = SubResource("BoxShape3D_k0o5b")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="Lake"]
+transform = Transform3D(18.2138, 0, -0.539268, 0, 7.68753, 0, 1.83564, 0, 5.35079, -2.76344, -3.03053, -2.6807)
+shape = SubResource("BoxShape3D_k0o5b")
