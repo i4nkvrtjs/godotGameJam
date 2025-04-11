@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://0s3fotonyv02"]
+[gd_scene load_steps=23 format=3 uid="uid://0s3fotonyv02"]
 
 [ext_resource type="Shader" uid="uid://hpw1dh2cp68s" path="res://sky.gdshader" id="1_4iw1c"]
 [ext_resource type="Script" uid="uid://dwlxgeejc7hik" path="res://sky.gd" id="2_hx1ia"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://c2xp8olpv5uu7" path="res://game_manager.gd" id="4_k0o5b"]
 [ext_resource type="PackedScene" uid="uid://6h1djuw3k621" path="res://log.tscn" id="5_2a1lc"]
 [ext_resource type="Terrain3DAssets" uid="uid://dal3jhw6241qg" path="res://demo/data/assets.tres" id="6_2a1lc"]
+[ext_resource type="ArrayMesh" uid="uid://dhgocmayvieyd" path="res://demo/assets/models/CommonTree_2.obj" id="7_f2dqo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i3pqv"]
 shader = ExtResource("1_4iw1c")
@@ -80,7 +81,11 @@ _shader_parameters = {
 &"projection_threshold": 0.8,
 &"world_space_normal_blend": true
 }
-show_region_grid = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2a1lc"]
+top_radius = 9.786
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_f2dqo"]
 
 [node name="Lvl" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.4732, 0, 34.5257)
@@ -108,7 +113,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 
 light_energy = 0.1
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75189, 47.0853)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75189, 50.8493)
 script = ExtResource("3_k0o5b")
 MOUSE_SENS_X = 0.005
 MOUSE_SENS_Y = 0.005
@@ -136,7 +141,20 @@ game_manager = NodePath("../GameManager")
 data_directory = "res://"
 material = SubResource("Terrain3DMaterial_2e6f6")
 assets = ExtResource("6_2a1lc")
-show_grid = true
-show_region_grid = true
 top_level = true
 metadata/_edit_lock_ = true
+
+[node name="Lake" type="CSGMesh3D" parent="."]
+transform = Transform3D(2.35583, 0, 0, 0, 1, 0, 0, 0, 1.88131, 0.0223503, -5.94777, 12.6572)
+mesh = SubResource("CylinderMesh_2a1lc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="Tree" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(-0.525784, 0, -0.850618, 0, 1, 0, 0.850618, 0, -0.525784, 20.6158, -0.67931, 25.3303)
+mesh = ExtResource("7_f2dqo")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(-0.257634, 0, -0.416803, 0, 1.14876, 0, 0.416803, 0, -0.257634, 20.6305, 0.396386, 25.3021)
+shape = SubResource("CylinderShape3D_f2dqo")

@@ -18,7 +18,7 @@ func _process(delta):
 		var cycle_progress = fmod(time_passed / cycle_duration, 1.0) # Normalize to 0-1 range
 
 		# Rotate the sun and moon based on the cycle progress
-		var angle = cycle_progress * 360.0 # Convert progress to degrees
+		var angle = -cycle_progress * 360.0 # Convert progress to degrees
 		sunMoon.rotation_degrees.x = angle
 
 
