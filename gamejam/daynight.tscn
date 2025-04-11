@@ -6,16 +6,17 @@
 shader = ExtResource("1_6pb6i")
 shader_parameter/topSkyDay = Color(0.40191, 0.589864, 1, 1)
 shader_parameter/horizonSkyDay = Color(0.118707, 0.355216, 1, 1)
-shader_parameter/topSkyNight = Color(1.20327e-06, 0, 0.477226, 1)
-shader_parameter/horizonSkyNight = Color(8.42288e-08, 0, 0.289934, 1)
-shader_parameter/horizonSunRiseSet = Color(0.992325, 0.637861, 0.793527, 1)
-shader_parameter/topSunRiseSet = Color(1, 0.306232, 0.242456, 1)
+shader_parameter/topSkyNight = Color(0, 0, 0.129412, 1)
+shader_parameter/horizonSkyNight = Color(0, 0.00275985, 0.0747912, 1)
+shader_parameter/horizonSunRiseSet = Color(0.960784, 0, 0.0980392, 1)
+shader_parameter/topSunRiseSet = Color(0.992157, 0.639216, 0.792157, 1)
 shader_parameter/sunColor = Color(0.938046, 0.836532, 0.112936, 1)
 shader_parameter/sunSize = 0.2
-shader_parameter/moonColor = Color(0.525252, 0.737656, 0.995272, 1)
+shader_parameter/moonColor = Color(0.878279, 0.932031, 0.998797, 1)
 shader_parameter/moonSize = 0.1
 shader_parameter/moonOffset = 0.05
-shader_parameter/ambientNightLight = Vector3(0.05, 0.05, 0.1)
+shader_parameter/starDensity = 0.01
+shader_parameter/starSize = 0.1
 
 [sub_resource type="Sky" id="Sky_67tih"]
 sky_material = SubResource("ShaderMaterial_gethi")
@@ -23,9 +24,25 @@ sky_material = SubResource("ShaderMaterial_gethi")
 [sub_resource type="Environment" id="Environment_rspxg"]
 background_mode = 2
 sky = SubResource("Sky_67tih")
+ambient_light_source = 3
 ambient_light_color = Color(0, 0.0533011, 0.397727, 1)
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="Animation" id="Animation_kih4v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.10145, -0.542797)]
+}
 
 [sub_resource type="Animation" id="Animation_6pb6i"]
 resource_name = "dayNight"
@@ -42,21 +59,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 3.10145, -0.542797), Vector3(6.28319, 3.10145, -0.542797)]
-}
-
-[sub_resource type="Animation" id="Animation_kih4v"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DirectionalLight3D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 3.10145, -0.542797)]
 }
 
 [sub_resource type="Animation" id="Animation_nfu6v"]
@@ -88,13 +90,11 @@ _data = {
 environment = SubResource("Environment_rspxg")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.855577, -0.516117, 0.0401319, -0.516533, 0.856267, 0, -0.0343636, -0.0207295, -0.999194, 0, 0, 0)
+transform = Transform3D(-0.855578, -0.516117, 0.0401319, -0.516533, 0.856267, 0, -0.0343636, -0.0207295, -0.999194, 0, 0, 0)
 shadow_enabled = true
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 light_color = Color(0.407996, 0.677044, 1, 1)
-light_energy = 0.3
 shadow_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -108,3 +108,8 @@ libraries = {
 &"": SubResource("AnimationLibrary_nfu6v")
 }
 autoplay = "nightDay"
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.9048, 0)
+light_color = Color(0.176471, 0.309804, 0.952941, 1)
+omni_range = 39.5357
